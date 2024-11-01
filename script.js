@@ -199,6 +199,9 @@ class TerminalPortfolio {
     });
 
     contentHTML += `
+            <div class="help-text" style="color: #666; margin-top: 20px; font-size: 0.9em;">
+                Use ↑↓ arrow keys to navigate, Enter to select
+            </div>
             <div class="input-line">
                 <span class="prompt">&gt;</span>
                 <span class="cursor blink">▮</span>
