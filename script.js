@@ -249,6 +249,20 @@ class TerminalPortfolio {
         e.preventDefault();
         this.moveSelection(1);
         break;
+      case "Enter":
+        e.preventDefault();
+        this.handleEnterKey();
+        break;
+    }
+  }
+
+  handleEnterKey() {
+    if (this.currentSection >= 0 && this.currentLink >= 0) {
+      const currentSection = this.sections[this.currentSection];
+      const links = currentSection.querySelectorAll("a");
+      if (links[this.currentLink]) {
+        links[this.currentLink].click();
+      }
     }
   }
 
