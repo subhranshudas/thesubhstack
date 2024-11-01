@@ -1,0 +1,160 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #1a1a1a;
+  font-family: "Courier New", monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: #00ff00;
+}
+
+.terminal {
+  width: 80%;
+  max-width: 800px;
+  background-color: #000;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+}
+
+.terminal-header {
+  background-color: #333;
+  padding: 10px;
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  align-items: center;
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.close {
+  background-color: #ff5f56;
+}
+.minimize {
+  background-color: #ffbd2e;
+}
+.maximize {
+  background-color: #27c93f;
+}
+
+.title {
+  color: #fff;
+  margin-left: 20px;
+  font-size: 14px;
+}
+
+.terminal-content {
+  padding: 20px;
+  min-height: 400px;
+}
+
+.input-line {
+  display: flex;
+  margin-top: 10px;
+}
+
+.prompt {
+  color: #00ff00;
+  margin-right: 8px;
+}
+
+.cursor {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #00ff00;
+  position: relative;
+  top: -1px;
+  margin-left: 2px;
+}
+
+.blink {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.loading-bar {
+  margin: 10px 0;
+  height: 20px;
+  background-color: #333;
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid #666;
+}
+
+.loading-progress {
+  height: 100%;
+  background-color: #00ff00;
+  width: 0%;
+  transition: width 0.04s linear;
+  border-radius: 2px;
+  background: linear-gradient(to right, #00cc00, #00ff00);
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.section {
+  margin: 20px 0;
+}
+
+.section-title {
+  color: #ffbd2e;
+  margin-bottom: 10px;
+}
+
+a {
+  color: #00ff00;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.selected {
+  background-color: #2a2a2a;
+  color: #00ff00;
+  padding: 5px;
+  border-radius: 3px;
+  border-left: 3px solid #00ff00;
+}
+
+.selected a {
+  color: #00ff00;
+  font-weight: bold;
+}
+
+.section a.selected {
+  background-color: #2a2a2a;
+  color: #00ff00;
+  padding: 2px 5px;
+  border-radius: 3px;
+  border-left: 3px solid #00ff00;
+}
+
+/* Update existing selected style to not affect links unless specifically selected */
+.section.selected a:not(.selected) {
+  color: inherit; /* Keep links their normal color when section is selected */
+}
