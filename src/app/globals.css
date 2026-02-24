@@ -1,0 +1,321 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* ─── Design Tokens ──────────────────────────────────────────────────────── */
+:root {
+  --bg-base:        #0a0a0b;
+  --bg-surface:     #111115;
+  --bg-elevated:    #18181e;
+  --bg-subtle:      #1f1f27;
+
+  --border-dim:     #2a2a35;
+  --border-default: #35354a;
+  --border-bright:  #4a4a65;
+
+  --text-primary:   #e8e8f0;
+  --text-secondary: #a0a0b8;
+  --text-muted:     #606078;
+  --text-faint:     #3a3a50;
+
+  --accent-primary:  #00d4aa;
+  --accent-dim:      #00a87f;
+  --accent-subtle:   #0d2e25;
+
+  --code-bg:        #0f1117;
+  --code-border:    #1e2030;
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@theme inline {
+  --color-background: var(--bg-base);
+  --color-foreground: var(--text-primary);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* ─── Base Reset ─────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  line-height: 1.7;
+  min-height: 100dvh;
+}
+
+/* ─── Selection ──────────────────────────────────────────────────────────── */
+::selection {
+  background-color: var(--accent-subtle);
+  color: var(--accent-primary);
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb {
+  background: var(--border-default);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--border-bright); }
+
+/* ─── Focus ──────────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ─── Prose (blog content) ───────────────────────────────────────────────── */
+.prose {
+  --tw-prose-body:          var(--text-primary);
+  --tw-prose-headings:      var(--text-primary);
+  --tw-prose-lead:          var(--text-secondary);
+  --tw-prose-links:         var(--accent-primary);
+  --tw-prose-bold:          var(--text-primary);
+  --tw-prose-counters:      var(--text-muted);
+  --tw-prose-bullets:       var(--border-bright);
+  --tw-prose-hr:            var(--border-dim);
+  --tw-prose-quotes:        var(--text-secondary);
+  --tw-prose-quote-borders: var(--accent-primary);
+  --tw-prose-captions:      var(--text-muted);
+  --tw-prose-code:          var(--accent-primary);
+  --tw-prose-pre-code:      var(--text-primary);
+  --tw-prose-pre-bg:        var(--code-bg);
+  --tw-prose-th-borders:    var(--border-default);
+  --tw-prose-td-borders:    var(--border-dim);
+}
+
+.prose a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--accent-dim);
+  transition: color 0.15s, text-decoration-color 0.15s;
+}
+.prose a:hover {
+  color: var(--accent-primary);
+  text-decoration-color: var(--accent-primary);
+}
+
+.prose blockquote {
+  border-left-color: var(--accent-primary);
+  background-color: var(--bg-subtle);
+  padding: 1rem 1.25rem;
+  border-radius: 0 4px 4px 0;
+  font-style: normal;
+}
+
+.prose blockquote p { margin: 0; color: var(--text-secondary); }
+
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  font-family: var(--font-mono), monospace;
+  letter-spacing: -0.02em;
+}
+
+.prose h2 {
+  border-bottom: 1px solid var(--border-dim);
+  padding-bottom: 0.4em;
+}
+
+.prose hr { border-color: var(--border-dim); }
+
+.prose table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.prose th {
+  background-color: var(--bg-elevated);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.8em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.prose td, .prose th {
+  border: 1px solid var(--border-dim);
+  padding: 0.6rem 0.8rem;
+}
+
+.prose tr:nth-child(even) td { background-color: var(--bg-surface); }
+
+/* ─── Code blocks (Shiki) ────────────────────────────────────────────────── */
+.shiki {
+  border-radius: 6px;
+  border: 1px solid var(--code-border);
+  overflow-x: auto;
+  padding: 1.25rem 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.75;
+}
+
+.shiki code { counter-reset: line; }
+
+.shiki .line {
+  display: inline-block;
+  width: 100%;
+}
+
+.shiki .line.highlighted {
+  background-color: #1e2a20;
+  border-left: 2px solid var(--accent-primary);
+  padding-left: 0.5rem;
+  margin-left: -0.5rem;
+}
+
+/* inline code */
+.prose :not(pre) > code {
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-dim);
+  border-radius: 4px;
+  padding: 0.15em 0.4em;
+  font-size: 0.85em;
+  color: var(--accent-primary);
+  font-family: var(--font-mono), monospace;
+}
+
+/* ─── Code block wrapper ─────────────────────────────────────────────────── */
+.code-block-wrapper {
+  position: relative;
+  margin: 1.5rem 0;
+}
+
+.code-block-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--code-border);
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.code-block-header .lang-badge {
+  color: var(--accent-primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.code-block-wrapper .shiki {
+  border-radius: 0 0 6px 6px;
+  border-top: none;
+  margin-top: 0;
+}
+
+/* copy button */
+.copy-btn {
+  background: transparent;
+  border: 1px solid var(--border-dim);
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.7rem;
+  font-family: var(--font-mono), monospace;
+  transition: all 0.15s;
+}
+.copy-btn:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+/* ─── Mermaid diagrams ───────────────────────────────────────────────────── */
+.mermaid-wrapper {
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-dim);
+  border-radius: 6px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  text-align: center;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ─── Utility classes ────────────────────────────────────────────────────── */
+.font-mono { font-family: var(--font-mono), monospace; }
+
+.text-accent { color: var(--accent-primary); }
+.border-accent { border-color: var(--accent-primary); }
+
+.surface {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-dim);
+  border-radius: 6px;
+}
+
+.surface-elevated {
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: 6px;
+}
+
+/* ─── Footer link hover ──────────────────────────────────────────────────── */
+.footer-link {
+  color: var(--text-muted);
+}
+.footer-link:hover {
+  color: var(--accent-primary);
+}
+
+/* ─── Blog card hover ────────────────────────────────────────────────────── */
+.blog-card {
+  transform: translateY(0) scale(1);
+  /* cubic-bezier(0.34, 1.56, 0.64, 1) = spring with slight overshoot */
+  transition:
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-color 0.2s ease,
+    box-shadow 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.blog-card:hover {
+  border-color: var(--border-bright);
+  transform: translateY(-3px) scale(1.015);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.blog-card:hover h2 {
+  color: var(--accent-primary);
+}
+
+/* ─── Animations ─────────────────────────────────────────────────────────── */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.4s ease-out both;
+}
+
+/* ─── Reading progress bar ───────────────────────────────────────────────── */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-dim));
+  z-index: 100;
+  transition: width 0.1s linear;
+}
