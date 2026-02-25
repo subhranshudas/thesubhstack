@@ -1,9 +1,14 @@
 import SectionLabel from "./SectionLabel";
 
-const SKILLS: { category: string; items: string[] }[] = [
+export interface Skill {
+  category: string;
+  items: string[];
+}
+
+const SKILLS = [
   {
     category: "Languages",
-    items: ["JavaScript / TypeScript", "Python"],
+    items: ["JavaScript", "TypeScript", "Python"],
   },
   {
     category: "Frontend",
@@ -11,17 +16,21 @@ const SKILLS: { category: string; items: string[] }[] = [
   },
   {
     category: "Backend",
-    items: ["Node.js / Express", "FastAPI"],
+    items: ["Node.js", "Express", "FastAPI"],
   },
   {
-    category: "Data",
+    category: "Database",
     items: ["PostgreSQL", "MongoDB"],
   },
   {
     category: "Infrastructure",
-    items: ["AWS", "Docker", "Git / CI/CD"],
+    items: ["AWS", "Docker", "Git", "CI/CD", "Github", "Vercel" ],
   },
-];
+  {
+    category: "Tools",
+    items: ["Cursor", "Postman", "Figma"]
+  }
+] satisfies Skill[];
 
 export default function SkillsetSection() {
   return (
