@@ -7,7 +7,7 @@ import ReadingProgress from "@/components/blog/ReadingProgress";
 import CodeCopyHydrator from "@/components/blog/CodeCopyHydrator";
 import { formatDate } from "@/lib/utils";
 
-export const revalidate = 300;
+export const revalidate = 1800;
 
 async function getPost(slug: string) {
   try {

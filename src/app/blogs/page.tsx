@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 // Next.js will revalidate this page every 5 minutes
-export const revalidate = 300;
+export const revalidate = 1800;
 
 async function getPosts(): Promise<BlogPost[]> {
   try {
