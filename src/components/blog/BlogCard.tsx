@@ -121,8 +121,12 @@ export default function BlogCard({ post }: BlogCardProps) {
             <time dateTime={post.publishedAt}>
               {formatDateShort(post.publishedAt)}
             </time>
-            <span aria-hidden="true">·</span>
-            <span>{post.readingTime} min read</span>
+            {post.readingTime > 0 && (
+              <>
+                <span aria-hidden="true">·</span>
+                <span>{post.readingTime} min read</span>
+              </>
+            )}
           </div>
         </div>
       </Link>

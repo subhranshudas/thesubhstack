@@ -88,7 +88,7 @@ export default async function BlogsPage({ searchParams }: BlogsPageProps) {
           </h1>
           <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
             {allPosts.length} post{allPosts.length !== 1 ? "s" : ""} on
-            engineering, systems, and software craft.
+            engineering, systems, AI and the craft of software.
           </p>
         </div>
 
