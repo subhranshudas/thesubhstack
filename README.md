@@ -11,10 +11,6 @@ Live at: [www.thesubhstack.com](https://www.thesubhstack.com)
 - **Syntax highlighting** — server-side with [Shiki](https://shiki.style/) (`github-dark-dimmed` theme) with one-click copy buttons
 - **Mermaid diagrams** — write ` ```mermaid ` blocks in Notion; rendered client-side with matching dark theme
 - **Math (KaTeX)** — `$inline$` and `$$block$$` LaTeX equations
-- **Table of Contents** — auto-generated with active heading tracking (desktop sidebar)
-- **Reading progress bar** — fixed progress indicator at page top
-- **Mobile responsive** — single column on mobile/iPad, two columns on desktop; card image on top (mobile) or left (desktop)
-- **Elastic card hover** — subtle spring animation on blog cards
 - **Image captions** — add a caption to any image in Notion; it becomes the hover tooltip (`title`) and accessibility alt text (`alt`) automatically
 - **AI agent friendly** — `robots.txt` (allows GPTBot, ClaudeBot, PerplexityBot, etc.), `sitemap.xml`, `llms.txt`, JSON-LD structured data
 
