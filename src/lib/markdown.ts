@@ -96,6 +96,42 @@ function rehypeShikiHighlight() {
   };
 }
 
+// ─── Custom rehype plugin: wrap images with links ───────────────────────────
+
+function rehypeImageLinks() {
+  return function (tree: Root) {
+    visit(tree, "element", (node: Element, index, parent) => {
+      if (node.tagName !== "img" || !parent) return;
+      // Already wrapped in an anchor — skip
+      if ((parent as Element).tagName === "a") return;
+
+      const src = (node.properties?.src as string) ?? "";
+      if (!src) return;
+
+      // Copy alt → title so browsers show it as a hover tooltip
+      const alt = (node.properties?.alt as string) ?? "";
+      if (alt) node.properties = { ...node.properties, title: alt };
+
+      const anchor: Element = {
+        type: "element",
+        tagName: "a",
+        properties: {
+          href: src,
+          target: "_blank",
+          rel: "noopener noreferrer",
+        },
+        children: [node],
+      };
+
+      (parent.children as typeof parent.children).splice(
+        index as number,
+        1,
+        anchor
+      );
+    });
+  };
+}
+
 // ─── Custom rehype plugin: Mermaid placeholder ─────────────────────────────
 
 function rehypeMermaidPlaceholder() {
@@ -145,6 +181,7 @@ export async function markdownToHtml(markdown: string): Promise<string> {
     .use(rehypeMermaidPlaceholder)
     .use(rehypeShikiHighlight)
     .use(rehypeKatex)
+    .use(rehypeImageLinks)
     .use(rehypeStringify, { allowDangerousHtml: true })
     .process(markdown);
 

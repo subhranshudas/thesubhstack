@@ -15,6 +15,7 @@ Live at: [www.thesubhstack.com](https://www.thesubhstack.com)
 - **Reading progress bar** — fixed progress indicator at page top
 - **Mobile responsive** — single column on mobile/iPad, two columns on desktop; card image on top (mobile) or left (desktop)
 - **Elastic card hover** — subtle spring animation on blog cards
+- **Image captions** — add a caption to any image in Notion; it becomes the hover tooltip (`title`) and accessibility alt text (`alt`) automatically
 - **AI agent friendly** — `robots.txt` (allows GPTBot, ClaudeBot, PerplexityBot, etc.), `sitemap.xml`, `llms.txt`, JSON-LD structured data
 
 ## Quick Start
@@ -105,6 +106,15 @@ graph TD
   B --> |No| D[Loop back]
   D --> A
 ```
+
+## Adding Image Captions
+
+In Notion, click an image block and add a caption beneath it. That caption is automatically used as:
+
+- The **`alt` attribute** — shown if the image fails to load; read by screen readers
+- The **`title` attribute** — shown as a native browser tooltip on hover
+
+Clicking any image in a post opens the full-resolution version in a new tab.
 
 ## Writing Math
 
