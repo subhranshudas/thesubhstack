@@ -162,13 +162,6 @@ src/
     └── notion.ts               # TypeScript types for posts
 ```
 
-## Deployment
-
-Deploy to Vercel:
-
-```bash
-vercel deploy
-```
 
 Set these environment variables in the Vercel dashboard:
 - `NOTION_TOKEN`
