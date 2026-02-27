@@ -72,7 +72,7 @@ export default function HomePage() {
             Subhranshu
           </h1>
           <p className="text-base max-w-xl" style={{ color: "var(--text-secondary)" }}>
-            full-stack engineer · blog writer · tinkerer.
+            full-stack engineer · blogger · tinkerer.
           </p>
           <div className="flex items-center gap-4 mt-6">
             <Link
