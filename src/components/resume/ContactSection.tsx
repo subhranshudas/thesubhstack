@@ -37,8 +37,8 @@ export default function ContactSection() {
             href={c.href}
             target={c.href.startsWith("http") ? "_blank" : undefined}
             rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
-            className="flex items-center gap-2 font-mono text-sm transition-colors hover:underline"
-            style={{ color: "var(--accent-primary)", textUnderlineOffset: "3px" }}
+            className="contact-link flex items-center gap-2 text-sm transition-colors hover:underline"
+            style={{ textUnderlineOffset: "3px" }}
           >
             {c.icon}
             {c.display}

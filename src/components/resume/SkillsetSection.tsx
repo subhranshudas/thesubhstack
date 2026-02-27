@@ -49,7 +49,7 @@ export default function SkillsetSection() {
               {items.map((skill) => (
                 <li
                   key={skill}
-                  className="font-mono text-xs px-2 py-0.5 rounded"
+                  className="text-sm px-2 py-0.5 rounded"
                   style={{
                     color: "var(--text-primary)",
                     border: "1px solid var(--border-default)",
