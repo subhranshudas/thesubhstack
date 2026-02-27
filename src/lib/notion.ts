@@ -8,6 +8,18 @@ const notion = new Client({
 
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
+// Notion file-type images are pre-signed S3 URLs that expire after 1 hour.
+// Instead of baking the expiring URL into the markdown/HTML, emit a stable
+// proxy path (/api/notion-image?blockId=xxx) that fetches a fresh URL on demand.
+n2m.setCustomTransformer("image", async (block) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const b = block as any;
+  const blockId: string = b.id;
+  const caption: string =
+    b.image?.caption?.map((c: { plain_text: string }) => c.plain_text).join("") ?? "";
+  return `![${caption}](/api/notion-image?blockId=${blockId})`;
+});
+
 const DATABASE_ID = process.env.NOTION_DATABASE_ID!;
 
 // ─── Helpers ──────────────────────────────────────────────────────────────
@@ -51,13 +63,20 @@ function estimateReadingTime(markdown: string): number {
   return Math.max(1, Math.ceil(words / 200));
 }
 
-function getCoverUrl(
+function hasCover(
   cover: { type: string; external?: { url: string }; file?: { url: string } } | null
-): string | undefined {
-  if (!cover) return undefined;
-  if (cover.type === "external") return cover.external?.url;
-  if (cover.type === "file") return cover.file?.url;
-  return undefined;
+): boolean {
+  if (!cover) return false;
+  if (cover.type === "external") return !!cover.external?.url;
+  if (cover.type === "file") return !!cover.file?.url;
+  return false;
+}
+
+// Returns a stable proxy URL for the page's cover image. The proxy fetches a
+// fresh pre-signed S3 URL from Notion at request time, avoiding expiry issues.
+function getCoverProxyUrl(pageId: string, cover: { type: string } | null): string | undefined {
+  if (!hasCover(cover as { type: string; external?: { url: string }; file?: { url: string } } | null)) return undefined;
+  return `/api/notion-cover?pageId=${pageId}`;
 }
 
 function extractTableOfContents(markdown: string): TocItem[] {
@@ -117,7 +136,7 @@ export async function getAllPosts(): Promise<BlogPost[]> {
         publishedAt,
         updatedAt: p.last_edited_time?.slice(0, 10) ?? publishedAt,
         tags: extractTags(props.Tags),
-        coverImage: getCoverUrl(p.cover),
+        coverImage: getCoverProxyUrl(p.id, p.cover),
         readingTime: 0, // will be recalculated when full content fetched
         status: "published" as const,
       };
@@ -165,7 +184,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPostFull | null> 
     publishedAt,
     updatedAt: page.last_edited_time?.slice(0, 10) ?? publishedAt,
     tags: extractTags(props.Tags),
-    coverImage: getCoverUrl(page.cover),
+    coverImage: getCoverProxyUrl(page.id, page.cover),
     readingTime: estimateReadingTime(markdown),
     status: "published",
     content: markdown,
