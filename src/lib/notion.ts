@@ -86,7 +86,16 @@ function extractTableOfContents(markdown: string): TocItem[] {
     const match = line.match(/^(#{1,4})\s+(.+)/);
     if (match) {
       const level = match[1].length;
-      const text = match[2].trim();
+      // Strip inline markdown formatting (bold, italic, code, strikethrough)
+      // that Notion embeds inside headings when text is styled.
+      const text = match[2]
+        .trim()
+        .replace(/\*\*(.*?)\*\*/g, "$1")
+        .replace(/__(.*?)__/g, "$1")
+        .replace(/\*(.*?)\*/g, "$1")
+        .replace(/_(.*?)_/g, "$1")
+        .replace(/`([^`]+)`/g, "$1")
+        .replace(/~~(.*?)~~/g, "$1");
       const id = text
         .toLowerCase()
         .replace(/[^a-z0-9\s-]/g, "")
