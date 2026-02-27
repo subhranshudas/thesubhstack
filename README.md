@@ -12,6 +12,7 @@ Live at: [www.thesubhstack.com](https://www.thesubhstack.com)
 - **Mermaid diagrams** — write ` ```mermaid ` blocks in Notion; rendered client-side with matching dark theme
 - **Math (KaTeX)** — `$inline$` and `$$block$$` LaTeX equations
 - **Image captions** — add a caption to any image in Notion; it becomes the hover tooltip (`title`) and accessibility alt text (`alt`) automatically
+- **Notion image proxy** — uploaded images and page covers are served through `/api/notion-image` and `/api/notion-cover`, which fetch a fresh pre-signed S3 URL from Notion on demand; eliminates the "AccessDenied / Request has expired" error that occurs when Notion's 1-hour S3 URLs are baked into cached HTML
 - **AI agent friendly** — `robots.txt` (allows GPTBot, ClaudeBot, PerplexityBot, etc.), `sitemap.xml`, `llms.txt`, JSON-LD structured data
 
 ## Quick Start
@@ -46,7 +47,7 @@ Your Notion database needs these exact properties:
 | `Tags` | Multi-select | Optional tags shown on cards |
 | `Excerpt` | Text | Short summary shown on blog card |
 
-**Cover image** — set via Notion's built-in page cover (click "Add cover" inside the page). Use an external URL rather than uploading a file to avoid expiring S3 links.
+**Cover image** — set via Notion's built-in page cover (click "Add cover" inside the page). Both uploaded files and external URLs are supported; the site proxies all cover images through `/api/notion-cover` so Notion's 1-hour S3 expiry never causes broken images.
 
 After creating the database, go to the integration's **Content access** tab and add the database there.
 
@@ -136,7 +137,10 @@ src/
 │   │   └── [slug]/page.tsx     # Individual blog post
 │   ├── sitemap.ts              # Dynamic XML sitemap
 │   ├── robots.ts               # robots.txt (AI-agent friendly)
-│   └── llms.txt/route.ts       # llms.txt for AI agents
+│   ├── llms.txt/route.ts       # llms.txt for AI agents
+│   └── api/
+│       ├── notion-image/       # Proxy: fetches fresh S3 URL for image blocks (?blockId=)
+│       └── notion-cover/       # Proxy: fetches fresh S3 URL for page covers (?pageId=)
 ├── components/
 │   ├── layout/
 │   │   ├── Header.tsx          # Sticky nav header
