@@ -3,6 +3,7 @@ import AboutSection from "@/components/resume/AboutSection";
 import SkillsetSection from "@/components/resume/SkillsetSection";
 import ProjectsSection from "@/components/resume/ProjectsSection";
 import ContactSection from "@/components/resume/ContactSection";
+import SectionCard from "@/components/resume/SectionCard";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -66,10 +67,15 @@ export default function HomePage() {
             </span>
           </div>
           <h1
-            className="font-mono text-3xl md:text-4xl font-bold tracking-tight mb-4"
+            className="font-mono text-3xl md:text-4xl font-bold tracking-tight mb-4 flex items-baseline gap-1"
             style={{ color: "var(--text-primary)" }}
           >
             Subhranshu
+            <span
+              className="inline-block w-[3px] h-7 md:h-8 ml-0.5 animate-cursor-blink"
+              style={{ backgroundColor: "var(--accent-primary)" }}
+              aria-hidden="true"
+            />
           </h1>
           <p className="text-base max-w-xl" style={{ color: "var(--text-secondary)" }}>
             full-stack engineer · blogger · tinkerer.
@@ -90,11 +96,19 @@ export default function HomePage() {
         </div>
 
         {/* Resume grid */}
-        <div className="space-y-8">
-          <AboutSection />
-          <SkillsetSection />
-          <ProjectsSection />
-          <ContactSection />
+        <div className="flex flex-col gap-4">
+          <SectionCard>
+            <AboutSection />
+          </SectionCard>
+          <SectionCard>
+            <SkillsetSection />
+          </SectionCard>
+          <SectionCard>
+            <ProjectsSection />
+          </SectionCard>
+          <SectionCard>
+            <ContactSection />
+          </SectionCard>
         </div>
       </div>
     </>

@@ -4,7 +4,7 @@ interface SectionLabelProps {
 
 export default function SectionLabel({ children }: SectionLabelProps) {
   return (
-    <div className="mb-4">
+    <div className="mb-5">
       <h2
         className="font-mono text-xs font-semibold tracking-widest uppercase"
         style={{ color: "var(--accent-primary)" }}
@@ -12,8 +12,8 @@ export default function SectionLabel({ children }: SectionLabelProps) {
         {children}
       </h2>
       <div
-        className="h-px mt-2"
-        style={{ background: "var(--border-dim)" }}
+        className="h-px mt-3 -mx-6"
+        style={{ backgroundColor: "var(--border-dim)" }}
         aria-hidden="true"
       />
     </div>

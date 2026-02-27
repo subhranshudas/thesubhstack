@@ -36,24 +36,24 @@ export default function SkillsetSection() {
   return (
     <section aria-labelledby="skillset-heading">
       <SectionLabel>Skillset</SectionLabel>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="flex flex-col gap-5">
         {SKILLS.map(({ category, items }) => (
-          <div
-            key={category}
-            className="rounded-md border px-4 py-4"
-            style={{ backgroundColor: "var(--bg-surface)", borderColor: "var(--border-default)" }}
-          >
-            <div className="font-mono text-xs mb-3" style={{ color: "var(--text-muted)" }}>
-              {category}
+          <div key={category} className="flex items-start gap-5">
+            <div
+              className="font-mono text-xs w-24 shrink-0 pt-0.5"
+              style={{ color: "var(--text-muted)" }}
+            >
+              $ {category.toLowerCase()}
             </div>
             <ul className="flex flex-wrap gap-2" role="list">
               {items.map((skill) => (
                 <li
                   key={skill}
-                  className="font-mono text-xs px-2 py-1 rounded"
+                  className="font-mono text-xs px-2 py-0.5 rounded"
                   style={{
                     color: "var(--text-primary)",
                     border: "1px solid var(--border-default)",
+                    backgroundColor: "var(--bg-elevated)",
                   }}
                 >
                   {skill}
