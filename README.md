@@ -6,7 +6,7 @@ Live at: [www.thesubhstack.com](https://www.thesubhstack.com)
 
 ## Features
 
-- **Dark theme** — permanent dark mode with a teal/cyan accent palette; designed to last 3+ years without overhaul
+- **Dark theme** — permanent dark mode with a teal/cyan accent palette;
 - **Notion CMS** — write posts in Notion, publish by setting `BlogStatus → Published`
 - **Syntax highlighting** — server-side with [Shiki](https://shiki.style/) (`github-dark-dimmed` theme) with one-click copy buttons
 - **Mermaid diagrams** — write ` ```mermaid ` blocks in Notion; rendered client-side with matching dark theme
