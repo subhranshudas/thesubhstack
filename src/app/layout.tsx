@@ -21,8 +21,8 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.thesubhstack.c
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "subhstack — Engineering Blog",
-    template: "%s · subhstack",
+    default: "thesubhstack — Engineering Blog",
+    template: "%s · thesubhstack",
   },
   description:
     "Engineering blog by Subhranshu — full-stack web development, system design, AI/ML, and deep-dives into the tools I build with.",
