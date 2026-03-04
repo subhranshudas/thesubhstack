@@ -307,6 +307,54 @@ body {
   color: var(--accent-primary);
 }
 
+/* ─── Read the blog button ───────────────────────────────────────────────── */
+@keyframes cloud-drift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes btn-glow-pulse {
+  0%, 100% { box-shadow: 0 0 4px 1px rgba(0, 212, 170, 0.1); }
+  50%       { box-shadow: 0 0 12px 4px rgba(0, 212, 170, 0.35); }
+}
+
+.read-blog-btn {
+  background: linear-gradient(
+    105deg,
+    #0d2e25 0%,
+    #0d2e25 20%,
+    #112e27 35%,
+    rgba(0, 212, 170, 0.22) 50%,
+    #112e27 65%,
+    #0d2e25 80%,
+    #0d2e25 100%
+  ) !important;
+  background-size: 300% 100% !important;
+  animation: cloud-drift 4s ease-in-out infinite, btn-glow-pulse 2.5s ease-in-out infinite;
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s ease,
+    border-color 0.2s ease;
+}
+
+.read-blog-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 14px 4px rgba(0, 212, 170, 0.28);
+  border-color: var(--accent-primary) !important;
+  background: rgba(0, 212, 170, 0.1) !important;
+  animation-play-state: paused;
+}
+
+.read-blog-arrow {
+  display: inline-block;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.read-blog-btn:hover .read-blog-arrow {
+  transform: translateX(5px);
+}
+
 /* ─── Animations ─────────────────────────────────────────────────────────── */
 @keyframes fade-in-up {
   from { opacity: 0; transform: translateY(8px); }

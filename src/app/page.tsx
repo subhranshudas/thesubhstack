@@ -7,7 +7,7 @@ import SectionCard from "@/components/resume/SectionCard";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "subhstack — Engineering Blog & Portfolio",
+  title: "thesubhstack — Engineering Blog & Portfolio",
   description:
     "Subhranshu — full-stack engineer specializing in TypeScript, React, Python, and cloud infrastructure. Engineering blog and portfolio.",
 };
@@ -83,14 +83,13 @@ export default function HomePage() {
           <div className="flex items-center gap-4 mt-6">
             <Link
               href="/blogs"
-              className="font-mono text-sm px-4 py-2 rounded border transition-all"
+              className="read-blog-btn font-mono text-sm px-4 py-2 rounded border"
               style={{
                 color: "var(--accent-primary)",
                 borderColor: "var(--accent-primary)",
-                backgroundColor: "var(--accent-subtle)",
               }}
             >
-              read the blog →
+              read the blog <span className="read-blog-arrow">→</span>
             </Link>
           </div>
         </div>
