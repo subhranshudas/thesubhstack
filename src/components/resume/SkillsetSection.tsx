@@ -28,7 +28,7 @@ const SKILLS = [
   },
   {
     category: "Tools",
-    items: ["Cursor", "Postman", "Figma"]
+    items: ["Claude Code", "Cursor", "Postman", "Figma"]
   }
 ] satisfies Skill[];
 
